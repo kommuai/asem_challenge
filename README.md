@@ -6,17 +6,26 @@ In a world where AI tools are everywhere, we want to see what you are personally
 
 ## Objective
 
-Given a driving video, build a scalable lane extraction method to estimate:
+Given a driving video, build a scalable lane understanding pipeline in **two phases**:
+
+### Phase 1 — Extract lane structure
+
+From the video, detect the lane lines and recover their shapes (curves, positions, and how lanes connect). Your output should support estimating:
 
 - Lane line positions relative to the camera center
 - Number of visible lane lines
-- A clean white-background drawing of the detected lane layout, similar to the example below
+
+### Phase 2 — Draw the lane layout
+
+Take the lane structure from Phase 1 and render it onto a clean **white background**, producing a schematic lane drawing similar to the example below. This becomes your `output_lane_drawing.png`.
 
 There is no fixed right answer. We care about your reasoning, method, and execution.
 
+**Please submit even if your solution does not quite hit the goal.** A partial result with a clear approach, documented assumptions, and honest limitations is much more useful to us than no submission.
+
 ## Goal Example
 
-Your `output_lane_drawing.png` should look like a clean lane layout on a white background, similar to this:
+Phase 2 should produce a drawing like this — lane lines on a white background, without the original road scene:
 
 ![Goal example: lane layout on a white background](goal-example.png)
 
@@ -41,7 +50,7 @@ ffmpeg -fflags +genpts -i drive.ts -c copy drive.mp4
 
 ## Task
 
-Use any method or tools to extract the lane structure from the video.
+Use any method or tools to complete both phases: extract lane structure from the video, then render it as a white-background drawing.
 
 You may use:
 
@@ -60,7 +69,7 @@ We prefer a simple scalable method over a highly accurate hard-coded result.
 
 ## Required Submission
 
-Submit:
+Submit what you have — even if Phase 1 or Phase 2 is only partially working:
 
 - `README.md`
 - `source_code/`
