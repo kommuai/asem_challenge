@@ -22,55 +22,16 @@ Files are available in this repository under:
 
 `870ce22d4093b701---2026-03-19--11-46-54/`
 
-You can also fetch them from the Kommu depot:
-
-`http://web.kommu.ai/depot/upload/870ce22d4093b701/870ce22d4093b701---2026-03-19--11-46-54--<N>---qcamera.ts`
-
-### Linux / macOS terminal
-
-```bash
-mkdir -p kommu_lane_challenge && cd kommu_lane_challenge
-BASE="http://web.kommu.ai/depot/upload/870ce22d4093b701/870ce22d4093b701---2026-03-19--11-46-54--"
-for N in {0..9}; do
-  curl -L -o "qcamera_${N}.ts" "${BASE}${N}---qcamera.ts"
-done
-```
-
-Combine into one video:
-
-```bash
-for N in {0..9}; do echo "file 'qcamera_${N}.ts'"; done > inputs.txt
-ffmpeg -f concat -safe 0 -i inputs.txt -c copy drive.ts
-ffmpeg -fflags +genpts -i drive.ts -c copy drive.mp4
-```
-
-### Windows PowerShell
-
-```powershell
-mkdir kommu_lane_challenge -Force
-cd kommu_lane_challenge
-$BASE="http://web.kommu.ai/depot/upload/870ce22d4093b701/870ce22d4093b701---2026-03-19--11-46-54--"
-0..9 | % { curl.exe -L -o "qcamera_$($_).ts" "$BASE$($_)---qcamera.ts" }
-```
-
-Combine into one video:
-
-```powershell
-0..9 | % { "file 'qcamera_$($_).ts'" } | Set-Content inputs.txt
-ffmpeg -f concat -safe 0 -i inputs.txt -c copy drive.ts
-ffmpeg -fflags +genpts -i drive.ts -c copy drive.mp4
-```
-
-### Clone from GitHub
-
-If you have access to this repository, you can clone it and use the segments directly:
+Clone the repository and combine the segments into one video:
 
 ```bash
 git clone git@github.com:kommuai/asem_challenge.git
 cd asem_challenge/870ce22d4093b701---2026-03-19--11-46-54
+PREFIX="870ce22d4093b701---2026-03-19--11-46-54--"
+for N in {0..9}; do echo "file '${PREFIX}${N}---qcamera.ts'"; done > inputs.txt
+ffmpeg -f concat -safe 0 -i inputs.txt -c copy drive.ts
+ffmpeg -fflags +genpts -i drive.ts -c copy drive.mp4
 ```
-
-Then build `inputs.txt` from the local filenames and run the same `ffmpeg` concat steps above.
 
 ## Task
 
